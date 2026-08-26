@@ -18,7 +18,9 @@ def save_history(chat_session):
     for content in chat_session.get_history():
         role = content.role
         parts = [{"text": part.text} for part in content.parts if part.text]
-        history_data.append({"role": role, "parts": parts})
+
+        if parts:
+            history_data.append({"role": role, "parts": parts})
 
     try:
         with open(HISTORY_FILE, "w", encoding="utf-8") as f:
